@@ -63,6 +63,8 @@ namespace MonoGameClient
             // Add the proxy client as a Game service o components can send messages 
             Services.AddService<IHubProxy>(proxy);
 
+            new FadeTextManager(this);
+
             base.Initialize();
         }
 
@@ -104,7 +106,7 @@ namespace MonoGameClient
                                     new Point(otherPlayerData.playerPosition.X, otherPlayerData.playerPosition.Y));
         }
 
-
+      
 
         private void ServerConnection_StateChanged(StateChange State)
     {
@@ -157,10 +159,14 @@ namespace MonoGameClient
         // When we get new player Data Create 
         private void CreatePlayer(PlayerData player)
         {
+            
             // Create an other player sprites in this client afte
             new SimplePlayerSprite(this, player, Content.Load<Texture2D>(player.imageName),
                                     new Point(player.playerPosition.X, player.playerPosition.Y));
-            connectionMessage = player.playerID + " created ";
+
+            //connectionMessage = player.playerID + " created ";
+
+            new FadeText(this, Vector2.Zero, "Welcome! " + player.GamerTag +" you are playing as " + player.imageName);
         }
 
         /// <summary>
@@ -173,6 +179,7 @@ namespace MonoGameClient
             Services.AddService<SpriteBatch>(spriteBatch);
 
             font = Content.Load<SpriteFont>("Message");
+            Services.AddService<SpriteFont>(font);
             
         }
 
