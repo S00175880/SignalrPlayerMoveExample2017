@@ -15,7 +15,8 @@ namespace Sprites
         public Rectangle BoundingRect;
         public bool Visible = true;
         public Color tint = Color.White;
-		public PlayerData pData;
+        public PlayerData pData;
+        
 		
         // Constructor epects to see a loaded Texture
         // and a start position
